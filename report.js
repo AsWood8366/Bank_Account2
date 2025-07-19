@@ -109,8 +109,8 @@ function applyFilters() {
 
 function saveAsPDF() {
   const element = document.getElementById("reportContent"); // ← یہ بدل دیں
-  if (!element) {
-    alert("ڈیٹا موجود نہیں، پہلے لوڈ کریں");
+  if (!element || element.innerHTML.trim() === "") {
+    alert("ڈیٹا موجود نہیں، پہلے فلٹر لگا کر رپورٹ دیکھیں");
     return;
   }
 
