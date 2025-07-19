@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>بینک اکاؤنٹ اندراج</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Jameel Noori Nastaleeq', sans-serif;
+      background: #f1f1f1;
+      padding: 10px;
+      margin: 0;
+    }
+    .header {
+      background: #e0e0e0;
+      padding: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      color: #4a148c;
+      border: 2px dashed orange;
+      border-radius: 6px;
+    }
+    .form-section, .bank-section {
+      background: #fff;
+      padding: 15px;
+      margin-top: 15px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    .bank-section:hover {
+  box-shadow: 0 0 10px rgba(0, 150, 136, 0.5);
+  transition: 0.3s;
+}
+    input, select, button {
+      width: 100%;
+      font-family: 'Jameel Noori Nastaleeq', sans-serif;
+      padding: 10px;
+      margin-top: 6px;
+      font-size: 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #7e57c2;
+      color: white;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .bank-title {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 26px; /* ← یہاں اضافہ کریں */
+      border-radius: 10px 10px 0 0;
+    }
+    .bank-title img {
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      
+    }
+    th, td {
+      border: 1px solid #aaa;
+      font-size: 22px;
+      padding: 10px;
+      text-align: right;
+    }
+    th {
+      background: #eee;
+    }
+    label {
+     font-size: 20px;
+     font-weight: bold;
+    }
+    .search-box {
+      margin-top: 15px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .search-box label {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    .search-box input {
+      flex: 1;
+      min-width: 150px;
+      padding: 8px;
+      font-size: 18px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .copy-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 2px;
+  font-size: 18px;
+  line-height: 1;
+  width: 18px;         /* ✅ مخصوص چوڑائی */
+  height: 18px;        /* ✅ مخصوص اونچائی */
+  text-align: center;
+  cursor: pointer;
+  color: #444;
+  display: inline-block;
+}
+
+.copy-btn:hover {
+  color: green;
+}
+.desktop-view {
+  display: table;
+  font-size: 20px;
+  width: 100%;
+}
+
+.mobile-view {
+  display: none;
+  padding-top: 10px;
+}
+
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.button-row button {
+  flex: 1;
+  min-width: 140px;
+  font-size: 20px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Jameel Noori Nastaleeq', sans-serif;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* 🌟 Individual Colors */
+#saveBtn {
+  background-color: #43a047; /* Green */
+  color: white;
+}
+#saveBtn:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}
+
+#updateBtn {
+  background-color: #ff9800; /* Orange */
+  color: white;
+}
+#updateBtn:hover {
+  background-color: #fb8c00;
+  transform: scale(1.05);
+}
+
+.button-row button:nth-child(3) {
+  background-color: #5c6bc0; /* Indigo */
+  color: white;
+}
+.button-row button:nth-child(3):hover {
+  background-color: #3f51b5;
+  transform: scale(1.05);
+}
+
+.button-row button:nth-child(4) {
+  background-color: #e53935; /* Red */
+  color: white;
+}
+.button-row button:nth-child(4):hover {
+  background-color: #c62828;
+  transform: scale(1.05);
+}
+
+
+    @media screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  .header {
+    font-size: 18px;
+    padding: 8px;
+  }
+.desktop-view {
+    
+    display: none;
+  }
+
+  .mobile-view {
+    display: block;
+    font-size: 20px;
+    line-height: 1.8;
+  }
+
+  .mobile-view p {
+    margin: 6px 0;
+    padding: 6px;
+    background: #f7f7f7;
+    border-radius: 6px;
+  }
+
+   label {
+    font-size: 18px;
+  }
+
+  .form-section, .bank-section, .search-box {
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  input, select, button {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  table, th, td {
+    font-size: 26px;
+    word-break: break-word;
+  }
+
+  .bank-title img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .copy-btn {
+    font-size: 12px;
+  }
+
+  .bank-title {
+    flex-direction: row;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .search-box {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .search-box label {
+    margin-right: 0;
+  }
+
+  .search-box input {
+    font-size: 14px;
+    padding: 6px;
+    min-width: 100%;
+  }
+
+  .bank-section table td,
+  .bank-section table th {
+    font-size: 20px !important;
+    padding: 5px;
+  }
+
+  .bank-section table th:nth-child(5),
+  .bank-section table td:nth-child(5) {
+    
+    min-width: 65px;
+  }
+
+  .bank-section button {
+    font-size: 14px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<div class="header">بینک اکاؤنٹ اندراج فارم</div>
+
+<div id="loginSection" class="form-section">
+  <label>👤 صارف نام</label>
+  <input type="text" id="username" placeholder="صارف نام درج کریں">
+  <label>🔐 پاس ورڈ</label>
+  <input type="password" id="password" placeholder="پاس ورڈ درج کریں">
+  <button onclick="login()">لاگ ان کریں</button>
+  
+</div>
+
+<div id="mainContent" style="display:none;">
+<div class="form-section" id="accountForm">
+  <label>بینک منتخب کریں</label>
+  <select id="bankName" onchange="previewLogo()">
+    <option value="">-- بینک منتخب کریں --</option>
+    <option value="alhabib">Bank Al Habib</option>
+    <option value="meezan">Meezan Bank</option>
+    <option value="mcb">MCB Bank</option>
+    <option value="ubl">UBL Bank</option>
+    <option value="hbl">HBL Bank</option>
+    <option value="allied">Allied Bank</option>
+    <option value="alfalah">Bank Alfalah</option>
+    <option value="askari">Askari Bank</option>
+    <option value="bop">The Bank of Punjab</option>
+    <option value="dubaiislamic">Dubai Islamic Bank</option>
+    <option value="faysal">Faysal Bank</option>
+    <option value="habibmetro">Habib Metro</option>
+    <option value="JS">JS Bank</option>
+    <option value="nbp">National Bank</option>
+    <option value="Soneri">Soneri Bank</option>
+    <option value="bankislami">Bank Islami</option>
+    <option value="easypaisa">EasyPaisa</option>
+    <option value="jazzcash">Jazz Cash</option>
+    <option value="upaisa">U Paisa</option>
+    <option value="----">---</option>
+  </select>
+
+  <div id="previewLogoArea" style="margin: 10px 0;">
+    <img id="previewLogo" src="" style="display:none; width:50px; height:auto;">
+  </div>
+
+  <label>اکاؤنٹ ٹائٹل</label>
+  <input type="text" id="accountTitle" placeholder="اکاونٹ ٹائٹل">
+
+  <label>اکاؤنٹ نمبر</label>
+  <input type="text" id="accountNumber" placeholder="اکاونٹ نمبر">
+
+  <label>IBAN</label>
+  <input type="text" id="iban" placeholder="IBAN no">
+
+  <label>نام</label>
+  <input type="text" id="name" placeholder="پارٹی نام">
+ </div>
+
+  <div class="button-row">
+  <button id="saveBtn" onclick="addAccount()">➕ اکاؤنٹ شامل کریں</button>
+  <button id="updateBtn" style="display:none;" onclick="updateAccount()">🔄 اکاؤنٹ اپڈیٹ کریں</button>
+  <button onclick="window.location.href='report.html'">📊 رپورٹ دیکھیں</button>
+  <button onclick="logout()">🚪 لاگ آؤٹ</button>
+</div>
+
+
+<div class="search-box">
+  <label>🔍 نام:</label>
+  <input type="text" id="searchName" placeholder="🔎 نام سے تلاش کریں" oninput="filterAccounts()">
+
+  <label>🔍 اکاؤنٹ ٹائٹل:</label>
+  <input type="text" id="searchTitle" placeholder="🔎 اکاؤنٹ ٹائٹل سے تلاش کریں" oninput="filterAccounts()">
+</div>
+
+<div id="accountList"></div>
+</div>
+
+<script>
+
+    const users = {
+    admin: { password: "1234", role: "admin" },
+    editor: { password: "1234", role: "editor" },
+    viewer: { password: "1234", role: "viewer" }
+  };
+
+  let currentRole = null;
+  
+
+  function login() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  if (users[user] && users[user].password === pass) {
+    currentRole = users[user].role;
+    // ✅ Save Login + Role in localStorage
+    sessionStorage.setItem("loggedIn", "true");
+    sessionStorage.setItem("role", currentRole);
+
+    alert("آپ کامیابی سے لوگ ان ہو چکے ہیں۔ ویلکم: " + currentRole);
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+
+    // صرف viewer کو فارم چھپانا ہے
+    if (currentRole === "viewer") {
+      document.getElementById("accountForm").style.display = "none";
+    }
+
+    // 🔁 لاگ اِن کامیابی کے بعد ہی ڈیٹا لوڈ کریں
+    loadFromSheet();
+
+  } else {
+    alert("غلط یوزر یا پاس ورڈ");
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem("loggedIn");
+  sessionStorage.removeItem("role");
+  location.reload();
+}
+
+
+   let editIndex = null;
+  const bankColors = {
+    alhabib: "#2e7d32", meezan: "#1565c0", mcb: "#43a047", ubl: "#1e88e5",
+    hbl: "#00897b", allied: "#37474f", alfalah: "#d32f2f", askari: "#6d4c41",
+    bop: "#ff6f00", dubaiislamic: "#388e3c", faysal: "#5c6bc0", habibmetro: "#00796b",
+    JS: "#c2185b", nbp: "#33691e", Soneri: "#fbc02d", bankislami: "#0097a7",
+    easypaisa: "#689f38", jazzcash: "#f44336", upaisa: "#4e342e"
+  };
+
+  const bankNames = {
+    alhabib: "Bank Al Habib", meezan: "Meezan Bank", alfalah: "Bank Alfalah",
+    mcb: "MCB Bank", ubl: "UBL Bank", hbl: "HBL Bank", allied: "Allied Bank",
+    askari: "Askari Bank", bop: "The Bank of Punjab", dubaiislamic: "Dubai Islamic Bank",
+    faysal: "Faysal Bank", habibmetro: "Habib Metro", JS: "JS Bank", nbp: "National Bank",
+    Soneri: "Soneri Bank", easypaisa: "EasyPaisa", jazzcash: "Jazz Cash", upaisa: "U Paisa"
+  };
+
+  const accounts = [];
+
+  function previewLogo() {
+  const key = document.getElementById("bankName").value;
+  const logo = document.getElementById("previewLogo");
+  if (key && key !== "----") {
+    logo.src = "images/" + key.toLowerCase() + ".png"; // ✔️ lowercase logo filename
+    logo.style.display = "inline-block";
+  } else {
+    logo.style.display = "none";
+  }
+}
+
+  function addAccount() {
+  const bankKey = document.getElementById("bankName").value.toLowerCase(); // ✔️ lowercase
+  const title = document.getElementById("accountTitle").value;
+  const number = document.getElementById("accountNumber").value;
+  const iban = document.getElementById("iban").value;
+  const name = document.getElementById("name").value;
+
+  if (!title || !name || !bankKey || bankKey === "----") {
+    alert("بینک، اکاؤنٹ ٹائٹل اور نام لازمی ہیں");
+    return;
+  }
+
+  const data = { bankName: bankKey, accountTitle: title, accountNumber: number, iban: iban, name: name };
+
+  if (editIndex !== null) {
+    accounts[editIndex] = { bankKey, title, number, iban, name };
+    updateToSheet(data, editIndex + 2);
+    editIndex = null;
+  } else {
+    accounts.push({ bankKey, title, number, iban, name });
+    sendToSheet(data);
+  }
+
+  // Reset form
+  document.getElementById("accountTitle").value = "";
+  document.getElementById("accountNumber").value = "";
+  document.getElementById("iban").value = "";
+  document.getElementById("name").value = "";
+  document.getElementById("bankName").value = "";
+  previewLogo();
+
+  document.getElementById("saveBtn").style.display = "inline-block";
+  document.getElementById("updateBtn").style.display = "none";
+
+  showAccounts(accounts);
+}
+
+
+function updateAccount() {
+  addAccount();
+}
+
+
+function sendToSheet(data) {
+  fetch("https://script.google.com/macros/s/AKfycbzKJBAbEezUCNCtLeN7cjlR3kKrl2eOcH24V6kYnLvMal5nTb2LU39IEsSOQ5UtyqnS5Q/exec", { // ← یہاں اپنا API لنک لگائیں
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(res => console.log("Success:", res))
+  .catch(err => console.error("Error sending to Sheet:", err));
+}
+function loadFromSheet() {
+  fetch("https://script.google.com/macros/s/AKfycbzKJBAbEezUCNCtLeN7cjlR3kKrl2eOcH24V6kYnLvMal5nTb2LU39IEsSOQ5UtyqnS5Q/exec") // ← آپ کا API
+    .then(res => res.json())
+    .then(data => {
+      accounts.length = 0;
+      data.forEach(d => {
+        accounts.push({
+          bankKey: d.bankName,
+          title: d.accountTitle,
+          number: d.accountNumber,
+          iban: d.iban,
+          name: d.name
+        });
+      });
+      showAccounts(accounts); // Table main show karen
+    })
+    .catch(err => console.error("Sheet se load nahi hua:", err));
+}
+function updateToSheet(data, row) {
+  const payload = { ...data, row }; // row نمبر شامل کریں
+
+  fetch("https://script.google.com/macros/s/AKfycbzKJBAbEezUCNCtLeN7cjlR3kKrl2eOcH24V6kYnLvMal5nTb2LU39IEsSOQ5UtyqnS5Q/exec", {
+    method: "POST",
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.text())
+  .then(res => console.log("Updated:", res))
+  .catch(err => console.error("Update error:", err));
+}
+
+  function showAccounts(data) {
+  const list = document.getElementById("accountList");
+  list.innerHTML = "";
+
+  data.forEach((acc, index) => {
+    const section = document.createElement("div");
+    section.className = "bank-section";
+    section.innerHTML = `
+      <div class="bank-title" style="background-color:${bankColors[acc.bankKey]}">
+        <img src="images/${acc.bankKey}.png" alt="${bankNames[acc.bankKey]}">
+        ${bankNames[acc.bankKey]}
+      </div>
+
+      <div class="responsive-table">
+        <table class="desktop-view">
+          <tr>
+            <th>نام</th>
+            <th>اکاؤنٹ ٹائٹل</th>
+            <th>اکاؤنٹ نمبر</th>
+            <th>IBAN</th>
+            <th>🎯</th>
+          </tr>
+          <tr>
+            <td><span style="font-size:24px;">${acc.name}</span></td>
+            <td>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span style="font-size:24px;">${acc.title}</span>
+                <button class="copy-btn" onclick="copyText('${acc.title}')">📋</button>
+              </div>
+            </td>
+            <td>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span style="font-size:24px;">${acc.number}</span>
+                <button class="copy-btn" onclick="copyText('${acc.number}')">🔗</button>
+              </div>
+            </td>
+            <td>
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span style="font-size:24px;">${acc.iban}</span>
+                <button class="copy-btn" onclick="copyText('${acc.iban}')">⧉</button>
+              </div>
+            </td>
+            <td>
+              <div style="display:flex; justify-content:center; gap:6px;">
+                ${currentRole === 'admin' ? `
+                  <button onclick="editAccount(${index})" title="ترمیم">✏️</button>
+                  <button onclick="deleteAccount(${index})" title="حذف">🗑️</button>
+                ` : ''}
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <div class="mobile-view">
+          <p><strong>نام:</strong> ${acc.name}</p>
+          <p><strong>اکاؤنٹ ٹائٹل:</strong> ${acc.title} <button class="copy-btn" onclick="copyText('${acc.title}')">📋</button></p>
+          <p><strong>اکاؤنٹ نمبر:</strong> ${acc.number} <button class="copy-btn" onclick="copyText('${acc.number}')">📋</button></p>
+          <p><strong>IBAN:</strong> ${acc.iban} <button class="copy-btn" onclick="copyText('${acc.iban}')">📋</button></p>
+          ${currentRole === 'admin' ? `
+          <p>
+            <button onclick="editAccount(${index})">✏️ ترمیم</button>
+            <button onclick="deleteAccount(${index})">🗑️ حذف</button>
+          </p>` : ''}
+        </div>
+      </div>
+    `;
+    list.appendChild(section);
+  });
+}
+
+
+
+
+  function deleteAccount(index) {
+  if (confirm("کیا آپ واقعی حذف کرنا چاہتے ہیں؟")) {
+    const rowToDelete = index + 2; // چونکہ row 1 header ہے
+
+    // ✅ گوگل شیٹ سے بھی ڈیلیٹ کریں
+    fetch("https://script.google.com/macros/s/AKfycbzKJBAbEezUCNCtLeN7cjlR3kKrl2eOcH24V6kYnLvMal5nTb2LU39IEsSOQ5UtyqnS5Q/exec", {
+      method: "POST",
+      body: JSON.stringify({ action: "delete", row: rowToDelete })
+    })
+    .then(res => res.text())
+    .then(res => {
+      console.log(res);
+      // لوکل سے بھی ہٹائیں
+      accounts.splice(index, 1);
+      showAccounts(accounts);
+    })
+    .catch(err => console.error("Delete error:", err));
+  }
+}
+function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      alert("کاپی ہو گیا: " + text);
+    }).catch(err => {
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  const tempInput = document.createElement("input");
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  try {
+    const success = document.execCommand("copy");
+    alert(success ? "کاپی ہو گیا: " + text : "کاپی نہیں ہوا");
+  } catch (err) {
+    alert("کاپی نہیں ہو سکا");
+  }
+  document.body.removeChild(tempInput);
+}
+
+  function editAccount(index) {
+  const acc = accounts[index];
+  document.getElementById("bankName").value = acc.bankKey;
+  document.getElementById("accountTitle").value = acc.title;
+  document.getElementById("accountNumber").value = acc.number;
+  document.getElementById("iban").value = acc.iban;
+  document.getElementById("name").value = acc.name;
+  previewLogo();
+  
+  editIndex = index;
+  document.getElementById("saveBtn").style.display = "none";
+  document.getElementById("updateBtn").style.display = "inline-block";
+}
+
+  function filterAccounts() {
+    const nameTerm = document.getElementById("searchName").value.toLowerCase();
+    const titleTerm = document.getElementById("searchTitle").value.toLowerCase();
+
+    const filtered = accounts.filter(acc =>
+      acc.name.toLowerCase().includes(nameTerm) &&
+      acc.title.toLowerCase().includes(titleTerm)
+    );
+
+    showAccounts(filtered);
+  }
+
+   window.onload = () => {
+  const isLoggedIn = sessionStorage.getItem("loggedIn") === "true";
+  const savedRole = sessionStorage.getItem("role");
+
+  if (isLoggedIn && savedRole) {
+    currentRole = savedRole;
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+
+    if (currentRole === "viewer") {
+      document.getElementById("accountForm").style.display = "none";
+    }
+
+    loadFromSheet();
+  } else {
+    document.getElementById("loginSection").style.display = "block";
+    document.getElementById("mainContent").style.display = "none";
+  }
+};
+window.addEventListener("beforeunload", function (e) {
+  // اگر user "Back" یا "Reload" کرے، تو session رہنے دیں
+  if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD ||
+      performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+    return;
+  }
+
+  // ورنہ ٹیب بند ہو رہا ہے → لاگ آؤٹ کر دو
+  sessionStorage.removeItem("loggedIn");
+  sessionStorage.removeItem("role");
+});
+</script>
+
+</body>
+</html>

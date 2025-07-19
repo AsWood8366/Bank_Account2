@@ -1,0 +1,120 @@
+
+body {
+  font-family: 'Jameel Noori Nastaleeq', sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+  padding: 10px;
+}
+.header {
+  text-align: center;
+  font-size: 24px;
+  background: linear-gradient(to right, #4a148c, #7e57c2);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+.filters input, .filters select {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  flex: 1;
+}
+.report-table {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.card {
+  background: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  direction: rtl;
+  font-size: 24px;
+  font-family: 'Jameel Noori Nastaleeq', sans-serif;
+}
+.card-title {
+  font-weight: bold;
+  color: #2e7d32;
+}
+.card-title span {
+  text-transform: uppercase;
+}
+.copy-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+.fancy-back-button {
+    background: linear-gradient(to right, #43cea2, #185a9d); /* گرادیئنٹ */
+    color: #fff;
+    padding: 12px 28px;
+    font-size: 20px;
+    font-family: 'Jameel Noori Nastaleeq', sans-serif;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin-top: 15px;
+  }
+
+  .fancy-back-button:hover {
+    background: linear-gradient(to right, #2bc0e4, #eaecc6);
+    color: #333;
+    transform: scale(1.05);
+    border-color: #333;
+  }
+
+  .fancy-back-button:active {
+    transform: scale(0.95);
+    box-shadow: none;
+  }
+
+ @media only screen and (max-width: 600px) {
+  .card {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .card div {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  .card div span {
+    display: inline-block;
+    margin: 2px 0;
+    font-size: 16px;
+  }
+
+  .filters input,
+  .filters select {
+    font-size: 14px;
+    padding: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .fancy-back-button {
+    padding: 10px 16px;
+    font-size: 16px;
+  }
+
+  .copy-btn {
+    font-size: 14px;
+    padding: 2px 6px;
+  }
+}

@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>بینک اکاؤنٹ رپورٹ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="header">📊 بینک اکاؤنٹ رپورٹ</div>
+ 
+ <button class="fancy-back-button" onclick="window.location.href='Bank Account.html'">🔙 واپس جائیں</button>
+ <button onclick="saveAsPDF()">📥 PDF محفوظ کریں</button>
+  <button onclick="shareReport()">📤 شیئر کریں</button>
+
+  
+  <div class="filters">
+    <input type="text" id="searchName" placeholder="🔍 نام سے تلاش کریں" oninput="applyFilters()">
+    <input type="text" id="searchTitle" placeholder="🔍 اکاؤنٹ ٹائٹل" oninput="applyFilters()">
+    <select id="searchBank" onchange="applyFilters()">
+      <option value="">📌 بینک منتخب کریں</option>
+      <option value="alhabib">Al Habib</option>
+      <option value="meezan">Meezan</option>
+      <option value="mcb">MCB</option>
+    </select>
+  </div>
+
+  <div id="reportTable" class="report-table"></div>
+  
+    
+  
+
+  <script src="report.js"></script>
+</body>
+</html>
