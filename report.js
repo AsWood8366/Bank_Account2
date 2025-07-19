@@ -14,6 +14,7 @@ function loadData() {
         bank: d.bankName || ""
       }));
       renderTable(allAccounts);
+      populateBankDropdown(allAccounts);  // ← 🔹 یہاں لگائیں
     })
     .catch(err => console.error("Error loading data:", err));
 }
@@ -79,6 +80,18 @@ function renderTable(data) {
   });
 }
 
+function populateBankDropdown(data) {
+  const bankSet = new Set(data.map(acc => acc.bank.toLowerCase()));
+  const dropdown = document.getElementById("searchBank");
+  dropdown.innerHTML = '<option value="">📌 بینک منتخب کریں</option>';
+
+  Array.from(bankSet).sort().forEach(bank => {
+    const option = document.createElement("option");
+    option.value = bank;
+    option.textContent = bank.toUpperCase();
+    dropdown.appendChild(option);
+  });
+}
 
 
 function applyFilters() {
