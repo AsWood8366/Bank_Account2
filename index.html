@@ -684,16 +684,21 @@ function fallbackCopy(text) {
     document.getElementById("mainContent").style.display = "none";
   }
 };
-window.addEventListener("beforeunload", function (e) {
-  // اگر user "Back" یا "Reload" کرے، تو session رہنے دیں
-  if (performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD ||
-      performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-    return;
-  }
+let isNavigatingAway = false;
 
-  // ورنہ ٹیب بند ہو رہا ہے → لاگ آؤٹ کر دو
-  sessionStorage.removeItem("loggedIn");
-  sessionStorage.removeItem("role");
+// جب user کسی لنک یا بٹن پر کلک کرے → لاگ آؤٹ نہ کرو
+document.querySelectorAll("a, button").forEach(el => {
+  el.addEventListener("click", () => {
+    isNavigatingAway = true;
+  });
+});
+
+// صرف tab بند ہو تو log out کرو
+window.addEventListener("beforeunload", function (e) {
+  if (!isNavigatingAway) {
+    sessionStorage.removeItem("loggedIn");
+    sessionStorage.removeItem("role");
+  }
 });
 </script>
 
