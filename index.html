@@ -686,16 +686,23 @@ function fallbackCopy(text) {
 };
 let isNavigatingAway = false;
 
-// جب user کسی لنک یا بٹن پر کلک کرے → لاگ آؤٹ نہ کرو
-document.querySelectorAll("a, button").forEach(el => {
-  el.addEventListener("click", () => {
+// بٹن یا لنک پر کلک ہونے پر ٹیب بند نہ سمجھو
+document.addEventListener("click", (e) => {
+  if (e.target.tagName === "A" || e.target.tagName === "BUTTON") {
     isNavigatingAway = true;
-  });
+  }
 });
 
-// صرف tab بند ہو تو log out کرو
+// history navigation (Back/Forward) پر logout نہ ہو
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    isNavigatingAway = true; // Cached page سے آیا تو logout نہ کرو
+  }
+});
+
+// صرف جب user واقعی tab بند کرے، تب logout ہو
 window.addEventListener("beforeunload", function (e) {
-  if (!isNavigatingAway) {
+  if (!isNavigatingAway && document.visibilityState !== "hidden") {
     sessionStorage.removeItem("loggedIn");
     sessionStorage.removeItem("role");
   }
